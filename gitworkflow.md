@@ -7,7 +7,6 @@ https://www.youtube.com/watch?v=d3N2yeAaLkc
 https://github.com/settings/personal-access-tokens
 https://github.com/settings/tokens
 
-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
 
 ## 2. clearing Linux Creds
 git credential-cache exit
@@ -18,7 +17,6 @@ git config --global --unset credential.helper store
 git push -u origin main
 make sure you enter your USERNAME, not the email
 Use the token generatd and push the repo
-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
 
 ## enable Cred Storage
 git config --global credential.helper store
@@ -72,3 +70,17 @@ git commit -m "Stop tracking secrets.txt"
 ## so your .gitignore file could look like this.
 config.local.json
 cache/
+
+
+## Associating your commits with issues.
+git commit -m "Refactored cache logic. see #12"
+git commit -m "Fix applied for validation bug. relates to #12"
+
+## closing the issue on commit.
+git commit -m "Fixed login bug. closes #12"
+use these keywords
+closes #12
+close #12
+fixes #12
+resolve #12
+resolves #12
