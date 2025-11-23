@@ -154,7 +154,7 @@ git commit -m "Fixed login bug. closes #12"
 ## 15.1 Closing the Issue via Commit
 
 ```bash
-git commit -m "Fixed login and cache bugs. closes #12, closes #15"
+git commit -m "committing files, which are adding workflow and git runner. closes #6, closes #5"
 ```
 
 

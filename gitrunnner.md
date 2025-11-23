@@ -22,14 +22,20 @@ Useful links:
 5. 
 
 ```bash
-mkdir actions-runner && cd actions-runner
-curl -o actions-runner-linux-x64-<version>.tar.gz -L https://github.com/actions/runner/releases/download/v<version>/actions-runner-linux-x64-<version>.tar.gz
-tar xzf ./actions-runner-linux-x64-<version>.tar.gz
-```
+
+# Create a folder
+$ mkdir actions-runner && cd actions-runner# Download the latest runner package
+$ curl -o actions-runner-linux-x64-2.329.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.329.0/actions-runner-linux-x64-2.329.0.tar.gz# Optional: Validate the hash
+$ echo "194f1e1e4bd02f80b7e9633fc546084d8d4e19f3928a324d512ea53430102e1d  actions-runner-linux-x64-2.329.0.tar.gz" | shasum -a 256 -c# Extract the installer
+$ tar xzf ./actions-runner-linux-x64-2.329.0.tar.gz
 
 ---
 
 ## Step 2. Configure the runner
+
+
+Now go to 
+Repo > Settings > Actions > Runner > choose OS and run config... 
 
 ```bash
 ./config.sh --url https://github.com/naaamlas/SecDevOpsDemo --token <TOKEN>
