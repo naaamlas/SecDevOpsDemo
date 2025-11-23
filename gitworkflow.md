@@ -89,12 +89,7 @@ resolves #12
 ## adding an issue using curl and or github cli
 
 ## curl
-curl -X POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer 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" \
-  https://api.github.com/repos/naaamlas/SecDevOpsDemo/issues \
-  -d '{"title":"Bug found","adding in new readme":"Details here"}'
-
+see secrets for it
 
 ## adding in more in comments.
 	git commit -m "Fix typo in login flow. closes #3
