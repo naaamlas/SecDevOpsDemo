@@ -1,97 +1,191 @@
-# Git issue workflow
+# Git Issue Workflow
 
-github issues + workflow 
-https://www.youtube.com/watch?v=d3N2yeAaLkc
+Integrating GitHub issues with workflow automation.  
+YouTube reference: [GitHub Issues + Workflow](https://www.youtube.com/watch?v=d3N2yeAaLkc)
 
-## 1. Generate Tokens
-https://github.com/settings/personal-access-tokens
-https://github.com/settings/tokens
+---
 
+## 1. Generate Personal Access Tokens (PAT)
 
-## 2. clearing Linux Creds
+- [Generate new PAT](https://github.com/settings/personal-access-tokens)  
+- [Token settings](https://github.com/settings/tokens)
+
+---
+
+## 2. Clearing Linux Git Credentials
+
+```bash
 git credential-cache exit
 git config --global --unset credential.helper
 git config --global --unset credential.helper store
+````
+
+---
 
 ## 3. Push Again Using the PAT
+
+```bash
 git push -u origin main
-make sure you enter your USERNAME, not the email
-Use the token generatd and push the repo
+```
 
-## enable Cred Storage
+* Enter your **USERNAME**, not email
+* Use the token generated for authentication
+
+---
+
+## 4. Enable Credential Storage
+
+```bash
 git config --global credential.helper store
+```
 
-creds stored as plain text files.
+> Credentials will be stored as plain text on your machine.
 
+---
 
-## generating ssh keys
+## 5. Generating SSH Keys
+
+```bash
 ssh-keygen -t ed25519 -C "salman.thegr8@gmail.com"
+```
 
-## ssh agent start
+---
+
+## 6. Start SSH Agent and Add Key
+
+```bash
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
+```
 
-## add public key to github
+---
+
+## 7. Add Public Key to GitHub
+
+```bash
 cat ~/.ssh/id_ed25519.pub
+```
 
-Go to GitHub:
-Settings → SSH and GPG keys → New SSH Key
+Then go to GitHub:
+**Settings → SSH and GPG keys → New SSH Key**
 
-## changing to ssh
+---
+
+## 8. Change Repository to Use SSH
+
+```bash
 git remote set-url origin git@github.com:naaamlas/SecDevOpsDemo.git
+```
 
-## test
+---
+
+## 9. Test SSH Connection
+
+```bash
 ssh -T git@github.com
-gt push
+git push
 git pull
 git fetch
+```
 
-if everything is done.. all good. 
+> If all commands work, SSH is correctly configured.
 
-## checking configs
+---
+
+## 10. Checking Git Configs
+
+```bash
 git remote -v
 git config --global --list
 git config --local --list
 ssh-add -l
 ssh -T git@github.com
+```
 
-## adding a file to ignore.
+---
+
+## 11. Adding a File to `.gitignore`
+
+```bash
 touch secrets.txt
 touch .gitignore
 nano .gitignore
+# add the line:
 secrets.txt
 git status
+```
 
-## un track a file from git
+---
+
+## 12. Untrack a File from Git
+
+```bash
 git rm --cached secrets.txt
 git commit -m "Stop tracking secrets.txt"
+```
 
+---
 
-## so your .gitignore file could look like this.
+## 13. Example `.gitignore` File
+
+```text
 config.local.json
 cache/
+```
 
+---
 
-## Associating your commits with issues.
+## 14. Associating Commits with Issues
+
+Link commits to issues without closing:
+
+```bash
 git commit -m "Refactored cache logic. see #12"
 git commit -m "Fix applied for validation bug. relates to #12"
+```
 
-## closing the issue on commit.
+---
+
+## 15. Closing the Issue via Commit
+
+```bash
 git commit -m "Fixed login bug. closes #12"
-use these keywords
-closes #12
-close #12
-fixes #12
-resolve #12
-resolves #12
+```
+## 15.1 Closing the Issue via Commit
+
+```bash
+git commit -m "Fixed login and cache bugs. closes #12, closes #15"
+```
 
 
-## adding an issue using curl and or github cli
+Other keywords supported:
 
-## curl
-see secrets for it
+* `closes #12`
+* `close #12`
+* `fix #12`
+* `fixes #12`
+* `resolve #12`
+* `resolves #12`
 
-## adding in more in comments.
-	git commit -m "Fix typo in login flow. closes #3
-	
-	Corrected the validation regex to handle edge cases."
+> GitHub will close the issue automatically when the commit is merged.
+
+---
+
+## 16. Adding an Issue Using cURL or GitHub CLI
+
+* **cURL:** Use your PAT for authentication
+* **GitHub CLI:** Recommended for secure workflow
+
+---
+
+## 17. Adding More Details in Commit Messages
+
+```bash
+git commit -m "Fix typo in login flow. closes #3
+
+Corrected the validation regex to handle edge cases."
+```
+
+> The entire commit message will appear in the issue’s closing comment.
+
+```
