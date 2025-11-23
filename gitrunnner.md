@@ -18,6 +18,8 @@ Useful links:
 1. Go to your repository on GitHub → **Settings → Actions → Runners → Add runner**.
 2. Choose **Linux**.
 3. Follow the commands GitHub provides:
+4. https://github.com/naaamlas/SecDevOpsDemo/settings/actions/runners/new
+5. 
 
 ```bash
 mkdir actions-runner && cd actions-runner
