@@ -1,0 +1,13 @@
+
+name: ZAP Baseline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  zap_scan:
+    runs-on: self-hosted
+    steps:
+      - run: docker run -t owasp/zap2docker-stable zap-baseline.py \
+            -t http://yourapp.local \
+            -r zap-report.html

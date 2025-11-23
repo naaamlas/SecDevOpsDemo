@@ -117,9 +117,71 @@ git push
 
 Once pushed, GitHub Actions will detect the workflow and run it on your self-hosted runner.
 
-```
+## Adding git runner 
+sudo adduser gh_runner
+sudo su - gh_runner
 
----
+## codeql sast workflow. 
+CodeQL SAST workflow:
 
-If you want, I can also make a **more visual version with tips, notes, and recommended labels for self-hosted runners** to make it like a mini handbook for your team. Do you want me to do that?
-```
+nano .github/workflows/codeql.yml
+nano .github/workflows/codeql.yml
+
+name: CodeQL
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  analyze:
+    runs-on: self-hosted
+
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: python
+
+      - name: Build
+        run: |
+          echo "Build step here if needed"
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v2
+
+
+
+nano .github/workflows/security.yml
+
+
+name: Secure Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  sast:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - run: semgrep --config auto
+
+  sca:
+    runs-on: self-hosted
+    steps:
+      - run: trivy fs .
+
+  dast:
+    runs-on: self-hosted
+    needs: [ sast, sca ]
+    steps:
+      - run: docker run -t owasp/zap2docker-stable zap-baseline.py -t http://yourapp.local

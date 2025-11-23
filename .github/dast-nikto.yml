@@ -1,0 +1,5 @@
+- name: Run Nikto
+  run: docker run --rm sullo/nikto -h http://yourapp.local -o nikto-report.html
+
+- name: Run Nmap
+  run: nmap -A yourapp.local -oN nmap-report.txt
