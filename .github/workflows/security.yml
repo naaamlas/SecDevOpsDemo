@@ -10,7 +10,13 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      - run: semgrep --config auto
+      - run: semgrep --config auto --json > semgrep-report.json
+
+      - name: Upload Semgrep Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-report
+          path: semgrep-report.json
 
   sca:
     runs-on: self-hosted
@@ -22,9 +28,3 @@ jobs:
     needs: [ sast, sca ]
     steps:
       - run: docker run -t owasp/zap2docker-stable zap-baseline.py -t http://yourapp.local
-
-- name: Upload Semgrep Report
-  uses: actions/upload-artifact@v4
-  with:
-    name: semgrep-report
-    path: semgrep-report.json
