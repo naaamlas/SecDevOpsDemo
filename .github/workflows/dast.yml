@@ -1,5 +1,9 @@
 
 name: ZAP Baseline
+permissions:
+  contents: read
+  actions: read
+  security-events: read
 
 on:
   workflow_dispatch:
