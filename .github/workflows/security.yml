@@ -7,7 +7,7 @@ on:
 
 jobs:
   sast:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest # The runner where the job executes
     steps:
       - uses: actions/checkout@v3
       - run: semgrep --config auto --json > semgrep-report.json
