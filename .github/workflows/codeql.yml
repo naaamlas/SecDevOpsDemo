@@ -7,7 +7,7 @@ on:
 
 jobs:
   analyze:
-    runs-on: self-hosted
+  runs-on: ubuntu-latest # The runner where the job executes
 
     permissions:
       contents: read
