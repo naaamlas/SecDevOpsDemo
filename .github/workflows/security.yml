@@ -19,12 +19,12 @@ jobs:
           path: semgrep-report.json
 
   sca:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest # The runner where the job executes
     steps:
       - run: trivy fs .
 
   dast:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest # The runner where the job executes
     needs: [ sast, sca ]
     steps:
       - run: docker run -t owasp/zap2docker-stable zap-baseline.py -t http://yourapp.local
